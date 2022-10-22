@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego del Ahorcado</title>
+    <link href="./assets/css/home.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>
+            <img class="header__logo" src="./assets/img/Logo.svg" alt="Logo Alura">
+        </h1>
+    </header>
+
+    <body onload="inicializar()" onkeydown="teclaPresionada(event)">
+        <section class="acciones">
+            <button class="iniciar" onclick="sortearPalabraSecreta()">Iniciar</button>
+            <button class="agregar-palabra">Agregar Nueva Palabra</button>
+        </section>
+        <section>
+            <input class="nueva-palabra" type="text" placeholder="Ingrese una palabra">
+            <button class="guardar-palabra" onclick="guardarPalabra()">Guardar y empezar</button>
+        </section>
+        <section class="juego">
+            <canvas class="juego__ahorcado"></canvas>
+            <canvas class="juego__letras-correctas"></canvas>
+            <canvas class="juego__letras-incorrectas"></canvas>
+            <canvas class="juego__resultado"></canvas>
+        </section>
+    </body>
+
+    <footer class="footer">
+        <img class="footer__logo" src="./assets/img/Logo.svg" alt="Logo Alura">
+        <div class="footer__datos-desarrollador">
+            <p>Diseñado Por:</p>
+            <p>Alan Montes de Oca Garcia</p>
+        </div>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
