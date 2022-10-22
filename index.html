@@ -15,18 +15,25 @@
 
     <body onload="inicializar()" onkeydown="teclaPresionada(event)">
         <section class="acciones">
-            <button class="iniciar" onclick="sortearPalabraSecreta()">Iniciar</button>
-            <button class="agregar-palabra">Agregar Nueva Palabra</button>
+            <button class="acciones__iniciar" onclick="sortearPalabraSecreta()">Iniciar Juego</button>
+            <button class="acciones__agregar-nueva-palabra">Agregar Nueva Palabra</button>
         </section>
-        <section>
-            <input class="nueva-palabra" type="text" placeholder="Ingrese una palabra">
-            <button class="guardar-palabra" onclick="guardarPalabra()">Guardar y empezar</button>
+        <section class="agregar-palabra">
+            <input class="agregar-palabra__palabra" type="text" placeholder="Ingrese una palabra">
+            <p>
+                <img src="./assets/img/Advertencia.svg" alt="Requisitos De Palabra">
+                Máx. de 8 letras
+            </p>
+            <button class="agregar-palabra__guardar" onclick="guardarPalabra()">Guardar Y Empezar</button>
+            <button class="agregar-palabra__cancelar">Cancelar</button>
         </section>
         <section class="juego">
             <canvas class="juego__ahorcado"></canvas>
             <canvas class="juego__letras-correctas"></canvas>
             <canvas class="juego__letras-incorrectas"></canvas>
             <canvas class="juego__resultado"></canvas>
+            <button class="juego__nuevo-juego">Nuevo Juego</button>
+            <button class="juego__desistir">Desistir</button>
         </section>
     </body>
 

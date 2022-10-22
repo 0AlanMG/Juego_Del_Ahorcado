@@ -240,7 +240,7 @@ function dibujarGanaste(){
 }
 
 function guardarPalabra(){
-    let nuevaPalabra = document.querySelector('.nueva-palabra').value;
+    let nuevaPalabra = document.querySelector('.agregar-palabra__palabra').value;
     
     if(nuevaPalabra != ""){
         nuevaPalabra = nuevaPalabra.replace(' ', '').toUpperCase();
