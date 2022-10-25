@@ -1,7 +1,13 @@
+const sectionAcciones = document.querySelector('.acciones');
+const sectionAgregarPalabra = document.querySelector('.agregar-palabra');
+const sectionJuego = document.querySelector('.juego');
 const ahorcado = document.querySelector('.juego__ahorcado');
 const letrasCorrectas = document.querySelector('.juego__letras-correctas');
 const letrasIncorrectas = document.querySelector('.juego__letras-incorrectas');
 const resultado = document.querySelector('.juego__resultado');
+
+const aviso = document.querySelector('.modal-body');
+var accionAviso = "";
 
 const letrasPermitidas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let palabrasSecretas = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE', 'DIEZ'];
@@ -10,19 +16,22 @@ var letrasPressCorrectas = [];
 var letrasPressIncorrectas = [];
 var intentoCorrecto = 0;
 var intentoErroneo = 0;
-var juegoTerminado = false;
+var leerLetra = false;
 
 function inicializar(){
+    /*Ahorcado Tamaño*/
     ahorcado.width = 300;
     ahorcado.height = 366;
 
-    /*Base*/
+    /*Ahorcado - Base*/
     const canvasCtx = ahorcado.getContext('2d');
+    canvasCtx.strokeStyle = "#0A3871";
     canvasCtx.lineWidth = 4.5;
     canvasCtx.moveTo(3, 363);
     canvasCtx.lineTo(297, 363);
     canvasCtx.stroke();
 
+    /*Juego*/
     letrasCorrectas.height = 98;
     letrasCorrectas.width = 200;
 
@@ -33,13 +42,13 @@ function inicializar(){
     resultado.width = 300;
 
     /*Juego Reiniciado*/
-
     palabraElegida = "";
     letrasPressCorrectas = [];
     letrasPressIncorrectas = [];
     intentoCorrecto = 0;
     intentoErroneo = 0;
-    juegoTerminado = false;
+    leerLetra = true;
+    accionAviso = "";
 }
 
 function sortearPalabraSecreta(){
@@ -58,6 +67,7 @@ function dibujarGuiones(){
 
     letrasCorrectas.width = (guiones.length * 90) - 10;
 
+    canvasCtx.strokeStyle = "#0A3871";
     canvasCtx.lineWidth = 4;
 
     for(var i = 1; i <= guiones.length; i++){
@@ -70,7 +80,7 @@ function dibujarGuiones(){
 }
 
 function teclaPresionada(event){
-    if(!juegoTerminado){
+    if(leerLetra){
         let letra = event.key.toUpperCase();
     
         if(palabraElegida != ""){
@@ -93,7 +103,8 @@ function dibujarLetraCorrecta(letra){
         }
     }
 
-    canvasCtx.font = "72px Arial";
+    canvasCtx.font = "72px Init";
+    canvasCtx.fillStyle = "#0A3871";
     canvasCtx.textAlign = 'center';
 
     for(var i = 0; i <= posicionLetra.length; i++){
@@ -105,8 +116,9 @@ function dibujarLetraIncorrecta(letra){
     const canvasCtx = letrasIncorrectas.getContext("2d");
 
     canvasCtx.clearRect(0, 0, letrasIncorrectas.width, letrasIncorrectas.height);
-    canvasCtx.font = "36px Arial";
+    canvasCtx.font = "36px Init";
     canvasCtx.textAlign = 'center';
+    canvasCtx.fillStyle = "#495057";
 
     letrasPressIncorrectas.push(letra);
 
@@ -118,6 +130,7 @@ function dibujarLetraIncorrecta(letra){
 function dibujarAhorcado(){
     const canvasCtx = ahorcado.getContext("2d");
 
+    canvasCtx.strokeStyle = "#0A3871";
     canvasCtx.lineWidth = 4.5;
     
     if(intentoErroneo == 1){
@@ -205,7 +218,7 @@ function verificarLetra(letra){
 function verificarFinJuego(){
     if(intentoErroneo == 9){
         dibujarFinJuego();
-        juegoTerminado = true;
+        leerLetra = false;
     }
 }
 
@@ -222,7 +235,7 @@ function dibujarFinJuego(){
 function verificarGanador(){
     if(intentoCorrecto == new Set(palabraElegida).size){
         dibujarGanaste();
-        juegoTerminado = true;
+        leerLetra = false;
     }
 }
 
@@ -239,7 +252,7 @@ function dibujarGanaste(){
     canvasCtx.fillText("Felicidades!", resultado.width/2, 80);
 }
 
-function guardarPalabra(){
+function btnGuardarPalabra(){
     let nuevaPalabra = document.querySelector('.agregar-palabra__palabra').value;
     
     if(nuevaPalabra != ""){
@@ -250,12 +263,91 @@ function guardarPalabra(){
             const validacion = new RegExp(/^[A-Z]+$/);
 
             if(validacion.test(nuevaPalabra)){
-                palabrasSecretas.push(nuevaPalabra);
-                sortearPalabraSecreta();   
+
+                if(!palabrasSecretas.includes(nuevaPalabra)){
+                    palabrasSecretas.push(nuevaPalabra);
+                    sortearPalabraSecreta();
+                
+                    sectionAcciones.style.display = 'none';
+                    sectionAgregarPalabra.style.display = 'none';
+                    document.querySelector('.agregar-palabra__palabra').value = "";
+                    sectionJuego.style.display = 'flex';
+                }
             }
             else{
                 inicializar();
             }
         }
     }
+}
+
+/*Section Acciones*/
+function btnIniciar(){
+    sectionAcciones.style.display = 'none';
+    sectionAgregarPalabra.style.display = 'none';
+    sectionJuego.style.display = 'flex';
+
+    sortearPalabraSecreta()
+}
+
+function btnAgregarNuevaPalabra(){
+    sectionAcciones.style.display = 'none';
+    sectionJuego.style.display = 'none';
+    sectionAgregarPalabra.style.display = 'flex';
+}
+
+/*Section Agregar Palabra*/
+function btnCancelar(){
+    sectionAgregarPalabra.style.display = 'none';
+    sectionJuego.style.display = 'none';
+    document.querySelector('.agregar-palabra__palabra').value = "";
+
+    sectionAcciones.style.display = 'flex';
+}
+
+/*Section Avisos*/
+function accionesAvisos(){
+    if(accionAviso == "desistir"){
+        accionDesistir();
+    }
+    if(accionAviso == "reiniciar"){
+        sortearPalabraSecreta();
+    }
+}
+
+/*Section Juego*/
+function btnNuevoJuego(){
+    accionAviso = "reiniciar";
+    aviso.innerHTML = "<p>¿Desea reiniciar el juego?</p>"
+
+    if(intentoErroneo < 9 && intentoCorrecto < new Set(palabraElegida).size){
+        $("#avisos").modal("show");
+        leerLetra = false;
+    }else{
+        accionesAvisos();
+    }
+}
+
+function btnDesistir(){
+    accionAviso = "desistir"
+    aviso.innerHTML = "<p>¿Desea terminar el juego?</p>"
+
+    if(intentoErroneo < 9 && intentoCorrecto < new Set(palabraElegida).size){
+        $("#avisos").modal("show");
+        leerLetra = false;
+    }else{
+        accionesAvisos();
+    }
+}
+
+function accionDesistir(){
+    sectionAgregarPalabra.style.display = 'none';
+    sectionJuego.style.display = 'none';
+    sectionAcciones.style.display = 'flex';
+
+    inicializar();
+}
+
+function btnAvisosNo(){
+    leerLetra = true;
 }

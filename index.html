@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego del Ahorcado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="./assets/css/reset.css" rel="stylesheet">
     <link href="./assets/css/home.css" rel="stylesheet">
 </head>
 <body>
@@ -15,25 +17,46 @@
 
     <body onload="inicializar()" onkeydown="teclaPresionada(event)">
         <section class="acciones">
-            <button class="acciones__iniciar" onclick="sortearPalabraSecreta()">Iniciar Juego</button>
-            <button class="acciones__agregar-nueva-palabra">Agregar Nueva Palabra</button>
+            <button class="acciones__iniciar" onclick="btnIniciar()">Iniciar Juego</button>
+            <button class="acciones__agregar-nueva-palabra" onclick="btnAgregarNuevaPalabra()">Agregar Nueva Palabra</button>
         </section>
         <section class="agregar-palabra">
-            <input class="agregar-palabra__palabra" type="text" placeholder="Ingrese una palabra">
-            <p>
-                <img src="./assets/img/Advertencia.svg" alt="Requisitos De Palabra">
-                Máx. de 8 letras
-            </p>
-            <button class="agregar-palabra__guardar" onclick="guardarPalabra()">Guardar Y Empezar</button>
-            <button class="agregar-palabra__cancelar">Cancelar</button>
+            <div>
+                <textarea class="agregar-palabra__palabra" placeholder="Ingrese una palabra"></textarea>
+                <p class="agregar-palabra__palabra-advertencia">
+                    <img src="./assets/img/Advertencia.svg" alt="Requisitos De Palabra">
+                    Máx. de 8 letras
+                </p>
+            </div>
+            <div>
+                <button class="agregar-palabra__guardar" onclick="btnGuardarPalabra()">Guardar Y Empezar</button>
+                <button class="agregar-palabra__cancelar" onclick="btnCancelar()">Cancelar</button>
+            </div>
         </section>
         <section class="juego">
             <canvas class="juego__ahorcado"></canvas>
             <canvas class="juego__letras-correctas"></canvas>
             <canvas class="juego__letras-incorrectas"></canvas>
             <canvas class="juego__resultado"></canvas>
-            <button class="juego__nuevo-juego">Nuevo Juego</button>
-            <button class="juego__desistir">Desistir</button>
+            <div class="juego__botones">
+                <button class="juego__nuevo-juego" onclick="btnNuevoJuego()">Nuevo Juego</button>
+                <button class="juego__desistir" onclick="btnDesistir()">Desistir</button>
+            </div>
+        </section>
+        <section class="modal fade" id="avisos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">¡Advertencia!</h5>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="avisos__boton-si" data-bs-dismiss="modal" onclick="accionesAvisos()">Si</button>
+                        <button class="avisos__boton-no" data-bs-dismiss="modal" onclick="btnAvisosNo()">No</button>
+                    </div>
+                </div>
+            </div>
         </section>
     </body>
 
@@ -44,7 +67,9 @@
             <p>Alan Montes de Oca Garcia</p>
         </div>
     </footer>
-
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
