@@ -8,14 +8,14 @@
     <link href="./assets/css/reset.css" rel="stylesheet">
     <link href="./assets/css/home.css" rel="stylesheet">
 </head>
-<body>
+<body onload="inicializar()" onkeydown="teclaPresionada(event)">
     <header class="header">
         <h1>
             <img class="header__logo" src="./assets/img/Logo.svg" alt="Logo Alura">
         </h1>
     </header>
 
-    <body onload="inicializar()" onkeydown="teclaPresionada(event)">
+    <main>
         <section class="acciones">
             <button class="acciones__iniciar" onclick="btnIniciar()">Iniciar Juego</button>
             <button class="acciones__agregar-nueva-palabra" onclick="btnAgregarNuevaPalabra()">Agregar Nueva Palabra</button>
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </section>
-    </body>
+    </main>
 
     <footer class="footer">
         <img class="footer__logo" src="./assets/img/Logo.svg" alt="Logo Alura">
