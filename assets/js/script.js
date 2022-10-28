@@ -1,3 +1,6 @@
+var screenWidth = 0;
+
+const home = document.querySelector('.header__logo');
 const sectionAcciones = document.querySelector('.acciones');
 const sectionAgregarPalabra = document.querySelector('.agregar-palabra');
 const sectionJuego = document.querySelector('.juego');
@@ -10,7 +13,7 @@ const aviso = document.querySelector('.modal-body');
 var accionAviso = "";
 
 const letrasPermitidas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-let palabrasSecretas = ['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE', 'DIEZ'];
+let palabrasSecretas = ['WYILJVAS'];//['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE', 'DIEZ'];
 var palabraElegida = "";
 var letrasPressCorrectas = [];
 var letrasPressIncorrectas = [];
@@ -19,6 +22,8 @@ var intentoErroneo = 0;
 var leerLetra = false;
 
 function inicializar(){
+    screenWidth = $(window).width();
+
     /*Ahorcado Tamaño*/
     ahorcado.width = 300;
     ahorcado.height = 366;
@@ -32,13 +37,24 @@ function inicializar(){
     canvasCtx.stroke();
 
     /*Juego*/
-    letrasCorrectas.height = 98;
     letrasCorrectas.width = 200;
 
-    letrasIncorrectas.height = 42;
-    letrasIncorrectas.width = 420;
+    if(screenWidth <= 450){
+        resultado.height = 35;
 
-    resultado.height = 50;
+        letrasCorrectas.height = 68;
+
+        letrasIncorrectas.height = 38;
+        letrasIncorrectas.width = 350;
+    }else{
+        resultado.height = 50;
+
+        letrasCorrectas.height = 98;
+
+        letrasIncorrectas.height = 42;
+        letrasIncorrectas.width = 420;
+    }
+
     resultado.width = 300;
 
     /*Juego Reiniciado*/
@@ -64,18 +80,35 @@ function dibujarGuiones(){
     
     let guiones = palabraElegida.split('');
     let posicionX = 0;
+    let guionLongitud = 0;
 
-    letrasCorrectas.width = (guiones.length * 90) - 10;
-
+    if(screenWidth <= 450){
+        guionLongitud = 50;
+        letrasCorrectas.width = (guiones.length * (guionLongitud + 5)) - 5;
+    }else{
+        guionLongitud = 80;
+        letrasCorrectas.width = (guiones.length * (guionLongitud + 10)) - 10;
+    }
+    
     canvasCtx.strokeStyle = "#0A3871";
     canvasCtx.lineWidth = 4;
 
-    for(var i = 1; i <= guiones.length; i++){
-        canvasCtx.moveTo(posicionX, 91);
-        canvasCtx.lineTo(posicionX + 80, 91);
-        canvasCtx.stroke();
+    if(screenWidth <= 450){
+        for(var i = 1; i <= guiones.length; i++){
+            canvasCtx.moveTo(posicionX, 61);
+            canvasCtx.lineTo(posicionX + guionLongitud, 61);
+            canvasCtx.stroke();
 
-        posicionX = posicionX + 90;
+            posicionX = posicionX + (guionLongitud + 5);
+        }
+    }else{
+        for(var i = 1; i <= guiones.length; i++){
+            canvasCtx.moveTo(posicionX, 91);
+            canvasCtx.lineTo(posicionX + guionLongitud, 91);
+            canvasCtx.stroke();
+        
+            posicionX = posicionX + (guionLongitud + 10);
+        }
     }
 }
 
@@ -103,12 +136,21 @@ function dibujarLetraCorrecta(letra){
         }
     }
 
-    canvasCtx.font = "72px Init";
     canvasCtx.fillStyle = "#0A3871";
     canvasCtx.textAlign = 'center';
 
-    for(var i = 0; i <= posicionLetra.length; i++){
-        canvasCtx.fillText(letra, (posicionLetra[(i)] * 90) + 40, 75);
+    if(screenWidth <= 450){
+        canvasCtx.font = "36px Init";
+
+        for(var i = 0; i <= posicionLetra.length; i++){
+            canvasCtx.fillText(letra, (posicionLetra[(i)] * 55) + 25, 45);
+        }
+    }else{
+        canvasCtx.font = "72px Init";
+
+        for(var i = 0; i <= posicionLetra.length; i++){
+            canvasCtx.fillText(letra, (posicionLetra[(i)] * 90) + 40, 75);
+        }
     }
 }
 
@@ -116,14 +158,23 @@ function dibujarLetraIncorrecta(letra){
     const canvasCtx = letrasIncorrectas.getContext("2d");
 
     canvasCtx.clearRect(0, 0, letrasIncorrectas.width, letrasIncorrectas.height);
-    canvasCtx.font = "36px Init";
     canvasCtx.textAlign = 'center';
     canvasCtx.fillStyle = "#495057";
 
     letrasPressIncorrectas.push(letra);
 
-    for(var i = 0; i < letrasPressIncorrectas.length; i++){
-        canvasCtx.fillText(letrasPressIncorrectas.join('  '), letrasIncorrectas.width/2, 36);
+    if(screenWidth <= 450){
+        canvasCtx.font = "32px Init";
+
+        for(var i = 0; i < letrasPressIncorrectas.length; i++){
+            canvasCtx.fillText(letrasPressIncorrectas.join('  '), letrasIncorrectas.width/2, 32);
+        }
+    }else{
+        canvasCtx.font = "36px Init";
+
+        for(var i = 0; i < letrasPressIncorrectas.length; i++){
+            canvasCtx.fillText(letrasPressIncorrectas.join('  '), letrasIncorrectas.width/2, 36);
+        }
     }
 }
 
@@ -226,10 +277,14 @@ function dibujarFinJuego(){
     const canvasCtx = resultado.getContext("2d");
 
     canvasCtx.fillStyle = "red";
-    canvasCtx.font = "40px Arial";
     canvasCtx.textAlign = 'center';
 
-    canvasCtx.fillText("Fin Del Juego!", resultado.width/2, 40);
+    if(screenWidth <= 450){
+        canvasCtx.font = "25px Arial";
+        canvasCtx.fillText("Fin Del Juego!", resultado.width/2, 25);
+    }else{
+        canvasCtx.font = "40px Arial";
+    }
 }
 
 function verificarGanador(){
@@ -242,19 +297,31 @@ function verificarGanador(){
 function dibujarGanaste(){
     const canvasCtx = resultado.getContext("2d");
 
-    resultado.height = 90;
+    if(screenWidth <= 450){
+        resultado.height = 65;
+    }else{
+        resultado.height = 90;
+    }
 
     canvasCtx.fillStyle = "green";
-    canvasCtx.font = "40px Arial";
     canvasCtx.textAlign = 'center';
 
-    canvasCtx.fillText("Ganaste, ", resultado.width/2, 40);
-    canvasCtx.fillText("Felicidades!", resultado.width/2, 80);
+    if(screenWidth <= 450){
+        canvasCtx.font = "25px Arial";
+        canvasCtx.fillText("Ganaste, ", resultado.width/2, 25);
+        canvasCtx.fillText("Felicidades!", resultado.width/2, 50);
+    }else{
+        canvasCtx.font = "40px Arial";
+        canvasCtx.fillText("Ganaste, ", resultado.width/2, 40);
+        canvasCtx.fillText("Felicidades!", resultado.width/2, 80);
+    }
 }
 
 function btnGuardarPalabra(){
     let nuevaPalabra = document.querySelector('.agregar-palabra__palabra').value;
     
+    const modalFooter = document.querySelector('.modal-footer');
+
     if(nuevaPalabra != ""){
         nuevaPalabra = nuevaPalabra.replace(' ', '').toUpperCase();
         
@@ -276,8 +343,23 @@ function btnGuardarPalabra(){
             }
             else{
                 inicializar();
+
+                modalFooter.innerHTML = "<button class='avisos__boton-ok' data-bs-dismiss='modal'>OK</button>";
+                aviso.innerHTML = "<p>Caracter invalido, solo letras</p>";
+            
+                $("#avisos").modal("show");
             }
+        }else{
+            modalFooter.innerHTML = "<button class='avisos__boton-ok' data-bs-dismiss='modal'>OK</button>";
+            aviso.innerHTML = "<p>Palabra demasiado larga, Max. 8 letras</p>";
+        
+            $("#avisos").modal("show");
         }
+    }else{
+        modalFooter.innerHTML = "<button class='avisos__boton-ok' data-bs-dismiss='modal'>OK</button>";
+        aviso.innerHTML = "<p>No hay palabra para agregar</p>";
+        
+        $("#avisos").modal("show");
     }
 }
 
@@ -317,10 +399,13 @@ function accionesAvisos(){
 
 /*Section Juego*/
 function btnNuevoJuego(){
+    const modalFooter = document.querySelector('.modal-footer');
+    
     accionAviso = "reiniciar";
     aviso.innerHTML = "<p>¿Desea reiniciar el juego?</p>"
 
     if(intentoErroneo < 9 && intentoCorrecto < new Set(palabraElegida).size){
+        modalFooter.innerHTML = "<button class='avisos__boton-si' data-bs-dismiss='modal' onclick='accionesAvisos()'>Si</button><button class='avisos__boton-no' data-bs-dismiss='modal' onclick='btnAvisosNo()'>No</button>";
         $("#avisos").modal("show");
         leerLetra = false;
     }else{
@@ -329,10 +414,13 @@ function btnNuevoJuego(){
 }
 
 function btnDesistir(){
-    accionAviso = "desistir"
-    aviso.innerHTML = "<p>¿Desea terminar el juego?</p>"
+    const modalFooter = document.querySelector('.modal-footer');
+
+    accionAviso = "desistir";
+    aviso.innerHTML = "<p>¿Desea terminar el juego?</p>";
 
     if(intentoErroneo < 9 && intentoCorrecto < new Set(palabraElegida).size){
+        modalFooter.innerHTML = "<button class='avisos__boton-si' data-bs-dismiss='modal' onclick='accionesAvisos()'>Si</button><button class='avisos__boton-no' data-bs-dismiss='modal' onclick='btnAvisosNo()'>No</button>";
         $("#avisos").modal("show");
         leerLetra = false;
     }else{
@@ -351,3 +439,7 @@ function accionDesistir(){
 function btnAvisosNo(){
     leerLetra = true;
 }
+
+home.addEventListener('click', () => {
+    btnDesistir();
+});
