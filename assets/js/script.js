@@ -370,7 +370,7 @@ function btnIniciar(){
     sectionJuego.style.display = 'flex';
 
     sortearPalabraSecreta();
-    focus();
+    $(textFiled).trigger("focus");
 }
 
 function btnAgregarNuevaPalabra(){
