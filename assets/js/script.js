@@ -369,7 +369,8 @@ function btnIniciar(){
     sectionAgregarPalabra.style.display = 'none';
     sectionJuego.style.display = 'flex';
 
-    sortearPalabraSecreta()
+    sortearPalabraSecreta();
+    focus();
 }
 
 function btnAgregarNuevaPalabra(){
