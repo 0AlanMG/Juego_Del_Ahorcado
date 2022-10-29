@@ -472,26 +472,16 @@ window.onkeydown = (e) => {
     alert(e.which);
 };
 
-var isMobile = {
-    Android: function() {
-        return navigator.userAgent.match(/Android/i);
-    },
-    BlackBerry: function() {
-        return navigator.userAgent.match(/BlackBerry/i);
-    },
-    iOS: function() {
-        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-    },
-    Opera: function() {
-        return navigator.userAgent.match(/Opera Mini/i);
-    },
-    Windows: function() {
-        return navigator.userAgent.match(/IEMobile/i);
-    },
-    any: function() {
-        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-    }
-}
+var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i)
 
 alert('Cargado');
 alert(isMobile);
+
+console.log(isMobile);
+
+if (isMobile) {
+    alert("Is mobile device");
+}
+else {
+    alert("Not mobile device");
+}
