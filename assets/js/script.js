@@ -118,16 +118,15 @@ function dibujarGuiones(){
 
 function teclaPresionada(event){
     if(leerLetra){
-        const keyCode = event.which || event.code;
-        let letra = event.key;
-        
-        if (!letra) {
-            letra = String.fromCharCode(keyCode).toUpperCase();
+        const currentCode = event.which || event.code;
+        let currentKey = event.key;
+  
+        if (!currentKey) {
+            currentKey = String.fromCharCode(currentCode);
         }
-        
-        letra = letra.toUpperCase();
-        
-        alert(letra);
+        str += currentKey;
+        event.preventDefault();
+        alert(str);
 
         if(palabraElegida != ""){
             if(letrasPermitidas.includes(letra)){
