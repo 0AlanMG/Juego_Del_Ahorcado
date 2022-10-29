@@ -3,8 +3,8 @@ body {
     background: #F3F5FC;
 }
 
-.tecla-presionada {
-    visibility: hidden;
+.tecla-presionada{
+    display: none;
 }
 
 /*Header*/

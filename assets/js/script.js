@@ -21,6 +21,9 @@ var intentoCorrecto = 0;
 var intentoErroneo = 0;
 var leerLetra = false;
 
+
+var tecla_Presionada = document.querySelector('.tecla-presionada');
+
 function inicializar(){
     screenWidth = $(window).width();
 
@@ -73,6 +76,7 @@ function sortearPalabraSecreta(){
         palabraElegida = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];
         dibujarGuiones();
     }
+
     $('.tecla-presionada').focus();
 }
 
@@ -443,4 +447,8 @@ function btnAvisosNo(){
 
 home.addEventListener('click', () => {
     btnDesistir();
+});
+
+document.addEventListener('keydown', (event) => {
+    teclaPresionada(event);
 });
