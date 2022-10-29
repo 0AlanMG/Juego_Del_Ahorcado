@@ -118,12 +118,16 @@ function dibujarGuiones(){
 
 function teclaPresionada(event){
     if(leerLetra){
-        let letra = event.key.toUpperCase();
-
-        alert(event);
-        alert(event.key);
-        alert(event.key.toUpperCase());
-        alert(palabraElegida);
+        const keyCode = event.which || event.code;
+        let letra = event.key;
+        
+        if (!letra) {
+            letra = String.fromCharCode(keyCode).toUpperCase();
+        }
+        
+        letra = letra.toUpperCase();
+        
+        alert(letra);
 
         if(palabraElegida != ""){
             if(letrasPermitidas.includes(letra)){
@@ -456,4 +460,10 @@ home.addEventListener('click', () => {
 document.addEventListener('keydown', function(event) {
     alert('Abrio');
     teclaPresionada(event);
+});
+
+document.addEventListener('keypress', (event) => {
+    
+    let currentKey = event.key;
+    
 });
