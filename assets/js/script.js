@@ -119,8 +119,10 @@ function dibujarGuiones(){
 function teclaPresionada(event){
     if(leerLetra){
 
+        console.log(event);
         alert(event.which);
         alert(event.code);
+        alert(event.keyCode);
 
         const currentCode = event.which || event.code;
         let currentKey = event.key;
