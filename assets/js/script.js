@@ -449,6 +449,6 @@ home.addEventListener('click', () => {
     btnDesistir();
 });
 
-$(document).on('keypress', (event) => {
+$(document).on('keypress', function (event) {
     teclaPresionada(event);
 });
