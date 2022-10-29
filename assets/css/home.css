@@ -3,11 +3,6 @@ body {
     background: #F3F5FC;
 }
 
-.tecla-presionada{
-    height: 0;
-    width: 0;
-}
-
 /*Header*/
 .header__logo{
     position: absolute;

@@ -21,9 +21,6 @@ var intentoCorrecto = 0;
 var intentoErroneo = 0;
 var leerLetra = false;
 
-
-var tecla_Presionada = document.querySelector('.tecla-presionada');
-
 function inicializar(){
     screenWidth = $(window).width();
 
@@ -76,7 +73,7 @@ function sortearPalabraSecreta(){
         palabraElegida = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];
         dibujarGuiones();
     }
-    $('.tecla-presionada').focus();
+    virtualKeyboard();
 }
 
 function dibujarGuiones(){
@@ -116,26 +113,8 @@ function dibujarGuiones(){
     }
 }
 
-function teclaPresionada(event){
+function teclaPresionada(letra){
     if(leerLetra){
-
-        console.log(event);
-        alert(event.which);
-        alert(event.code);
-        alert(event.keyCode);
-
-        const currentCode = event.which || event.code;
-        let currentKey = event.key;
-
-        alert(currentCode);
-
-        if (!currentKey) {
-            currentKey = String.fromCharCode(currentCode);
-        }
-        str += currentKey;
-        event.preventDefault();
-        alert(str);
-
         if(palabraElegida != ""){
             if(letrasPermitidas.includes(letra)){
                 verificarLetra(letra);
@@ -304,6 +283,7 @@ function dibujarFinJuego(){
         canvasCtx.fillText("Fin Del Juego!", resultado.width/2, 25);
     }else{
         canvasCtx.font = "40px Arial";
+        canvasCtx.fillText("Fin Del Juego!", resultado.width/2, 40);
     }
 }
 
@@ -460,28 +440,22 @@ function btnAvisosNo(){
     leerLetra = true;
 }
 
+function virtualKeyboard() {
+    let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+    let isTablet = navigator.userAgent.toLowerCase().match(/tablet/i);
+
+    if (isMobile || isTablet) {
+        alert("Is mobile device");
+    }
+    else {
+        alert("Not mobile device");
+    }
+}
+
 home.addEventListener('click', () => {
     btnDesistir();
 });
 
-window.onkeydown = (e) => {
-    console.log(e);
-    alert(e.code);
-    alert(e.key);
-    alert(e.keyCode);
-    alert(e.which);
-};
-
-var isMobile = navigator.userAgent.toLowerCase().match(/mobile/i)
-
-alert('Cargado');
-alert(isMobile);
-
-console.log(isMobile);
-
-if (isMobile) {
-    alert("Is mobile device");
-}
-else {
-    alert("Not mobile device");
-}
+document.addEventListener('keydown', (event) => {
+    teclaPresionada(event.key.toUpperCase());
+});
