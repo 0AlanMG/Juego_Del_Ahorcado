@@ -458,7 +458,7 @@ home.addEventListener('click', () => {
     btnDesistir();
 });
 
-document.addEventListener('keypress', (event) => {
+document.addEventListener('keyup', (event) => {
     alert('Abrio');
     teclaPresionada(event);
 });
