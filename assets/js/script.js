@@ -120,7 +120,10 @@ function dibujarGuiones(){
 function teclaPresionada(event){
     if(leerLetra){
         let letra = event.key.toUpperCase();
-    
+
+        alert(letra);
+        alert(palabraElegida);
+
         if(palabraElegida != ""){
             if(letrasPermitidas.includes(letra)){
                 verificarLetra(letra);
@@ -451,4 +454,5 @@ home.addEventListener('click', () => {
 
 document.addEventListener('keydown', function(event) {
     alert('Abrio');
+    teclaPresionada(event);
 });
