@@ -493,7 +493,5 @@ var isMobile = {
     }
 }
 
-window.onload(() => {
-    alert('Cargado');
-    alert(isMobile);
-});
+alert('Cargado');
+alert(isMobile);
