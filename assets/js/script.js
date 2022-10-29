@@ -120,7 +120,9 @@ function teclaPresionada(event){
     if(leerLetra){
         const currentCode = event.which || event.code;
         let currentKey = event.key;
-  
+
+        alert(currentCode);
+
         if (!currentKey) {
             currentKey = String.fromCharCode(currentCode);
         }
@@ -456,13 +458,7 @@ home.addEventListener('click', () => {
     btnDesistir();
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', (event) => {
     alert('Abrio');
     teclaPresionada(event);
-});
-
-document.addEventListener('keypress', (event) => {
-    
-    let currentKey = event.key;
-    
 });
