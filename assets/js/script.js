@@ -73,6 +73,7 @@ function sortearPalabraSecreta(){
         palabraElegida = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];
         dibujarGuiones();
     }
+    $('.tecla-presionada').focus();
 }
 
 function dibujarGuiones(){
@@ -370,7 +371,6 @@ function btnIniciar(){
     sectionJuego.style.display = 'flex';
 
     sortearPalabraSecreta();
-    $(textFiled).trigger("focus");
 }
 
 function btnAgregarNuevaPalabra(){
