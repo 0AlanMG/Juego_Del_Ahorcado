@@ -450,5 +450,5 @@ home.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', function(event) {
-    teclaPresionada(event);
+    alert('Abrio');
 });
