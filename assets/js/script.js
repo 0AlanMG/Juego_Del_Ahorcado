@@ -76,7 +76,6 @@ function sortearPalabraSecreta(){
         palabraElegida = palabrasSecretas[Math.floor(Math.random()*palabrasSecretas.length)];
         dibujarGuiones();
     }
-
     $('.tecla-presionada').focus();
 }
 
@@ -121,7 +120,9 @@ function teclaPresionada(event){
     if(leerLetra){
         let letra = event.key.toUpperCase();
 
-        alert(letra);
+        alert(event);
+        alert(event.key);
+        alert(event.key.toUpperCase());
         alert(palabraElegida);
 
         if(palabraElegida != ""){
