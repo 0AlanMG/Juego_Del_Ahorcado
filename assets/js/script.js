@@ -471,3 +471,10 @@ window.onkeydown = (e) => {
     alert(e.keyCode);
     alert(e.which);
 };
+
+window.onload(() => {
+    if(navigator.userAgent.match(/Android/i))
+    {
+        alert("You're using Mobile Device!!")
+    }
+});
