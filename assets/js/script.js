@@ -13,7 +13,7 @@ const aviso = document.querySelector('.modal-body');
 var accionAviso = "";
 
 const letrasPermitidas = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-let palabrasSecretas = ['HTML', 'CSS', 'CELULAR', 'PANTALLA', 'PYTHON', 'PC', 'LAPTOP', 'PHP', 'FRONTEND', 'BACKEND', 'JAVA', 'HDMI', 'WINDOWS', 'LINUX', 'MAC', 'ALURA', 'ORACLE'];
+let palabrasSecretas = ['LINKEDIN', 'FACEBOOK', 'YOUTUBE', 'INTERNET', 'WEB', 'HTML', 'CSS', 'CELULAR', 'PANTALLA', 'PYTHON', 'PC', 'LAPTOP', 'PHP', 'FRONTEND', 'BACKEND', 'JAVA', 'HDMI', 'WINDOWS', 'LINUX', 'MAC', 'ALURA', 'ORACLE'];
 var palabraElegida = "";
 var letrasPressCorrectas = [];
 var letrasPressIncorrectas = [];
