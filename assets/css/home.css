@@ -217,7 +217,7 @@ body {
 }
 
 /*Avisos*/
-.modal-content {
+.modal-avisos {
     height: 250px;
     width: 400px;
 
@@ -242,7 +242,7 @@ body {
     font-size: 1.6rem;
 }
 
-.modal-body {
+.modal-avisos-body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -305,6 +305,39 @@ body {
     line-height: 1.1875rem;
 }
 
+/*Teclado*/
+.teclado {
+    width: calc(100vw - 3rem);
+    height: auto;
+
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 30px;
+
+    background: lightblue;
+
+    padding: .4rem .1rem;
+
+    margin: 0 1rem 2rem 1rem;
+}
+
+.tecla {
+    width: calc((100vw - 6rem)/10);
+    height: calc(5vh);
+
+    font-size: 1.1rem;
+
+    border-radius: 15px;
+    
+    margin: .1rem;
+
+    border: none;
+}
+
 /*Footer*/
 .footer{
     height: auto;
@@ -359,6 +392,15 @@ body {
         top: 7rem;
         left: calc((100vw/2) - 150px);
     }
+
+    /*Teclado*/
+    .teclado {
+        width: calc(100vw - 6.5rem);
+    }
+
+    .tecla {
+        width: calc((100vw - 13rem)/10);
+    }
 }
 
 @media screen and (max-width: 720px) {
@@ -383,6 +425,15 @@ body {
     /*Juego*/
     .juego__botones {
         margin-bottom: 1rem;
+    }
+
+    /*Teclado*/
+    .teclado {
+        width: calc(100vw - 5.5rem);
+    }
+
+    .tecla {
+        width: calc((100vw - 11rem)/10);
     }
 }
 
@@ -445,8 +496,17 @@ body {
         margin-bottom: 1rem;
     }
 
+    /*Teclado*/
+    .teclado {
+        width: calc(100vw - 4rem);
+    }
+
+    .tecla {
+        width: calc((100vw - 8rem)/10);
+    }
+
     /*Avisos*/
-    .modal-content {
+    .modal-avisos {
         width: calc(100vw - 4rem);
         left: calc(100vw/2 - ((100vw - 4rem)/2));
         bottom: 0;
@@ -460,5 +520,16 @@ body {
     
     .avisos__boton-no, .avisos__boton-ok {
         width: calc(100vw/2 - 6rem);
+    }
+}
+
+@media screen and (max-width: 375px) {
+    /*Teclado*/
+    .teclado {
+        width: calc(100vw - 3rem);
+    }
+
+    .tecla {
+        width: calc((100vw - 6rem)/10);
     }
 }

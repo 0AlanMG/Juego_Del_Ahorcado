@@ -12,7 +12,7 @@ const resultado = document.querySelector('.juego__resultado');
 const aviso = document.querySelector('.modal-body');
 var accionAviso = "";
 
-const letrasPermitidas = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const letrasPermitidas = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 let palabrasSecretas = ['WYILJVAS'];//['UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE', 'DIEZ'];
 var palabraElegida = "";
 var letrasPressCorrectas = [];
@@ -440,18 +440,6 @@ function btnAvisosNo(){
     leerLetra = true;
 }
 
-function virtualKeyboard() {
-    let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
-    let isTablet = navigator.userAgent.toLowerCase().match(/tablet/i);
-
-    if (isMobile || isTablet) {
-        alert("Is mobile device");
-    }
-    else {
-        alert("Not mobile device");
-    }
-}
-
 home.addEventListener('click', () => {
     btnDesistir();
 });
@@ -459,3 +447,31 @@ home.addEventListener('click', () => {
 document.addEventListener('keydown', (event) => {
     teclaPresionada(event.key.toUpperCase());
 });
+
+/*Teclado*/
+const teclado = document.querySelector(".teclado");
+let button = "";
+
+for(let i = 0; i < letrasPermitidas.length; i++){
+    button = document.createElement('button');
+    button.innerText = letrasPermitidas[i];
+    teclado.appendChild(button);
+}
+
+const teclas = document.querySelectorAll('.teclado button');
+
+teclas.forEach( (tecla) => {
+    tecla.addEventListener('click', (event) => {
+        teclaPresionada(event.target.innerText.toUpperCase());
+    });
+    tecla.classList.add('tecla');
+});
+
+function virtualKeyboard() {
+    let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+    let isTablet = navigator.userAgent.toLowerCase().match(/tablet/i);
+
+    if (isMobile || isTablet) {
+        teclado.style.display = "flex";
+    }
+}
