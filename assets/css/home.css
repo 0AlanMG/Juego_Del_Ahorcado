@@ -318,7 +318,7 @@ body {
     border: none;
     border-radius: 30px;
 
-    background: lightblue;
+    background: #0A3871;
 
     padding: .4rem .1rem;
 
@@ -336,6 +336,8 @@ body {
     margin: .1rem;
 
     border: none;
+
+    background: #D8DFE8;
 }
 
 /*Footer*/
